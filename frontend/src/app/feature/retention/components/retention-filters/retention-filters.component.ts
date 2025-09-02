@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { RetentionRequest } from '../../models/retention';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   templateUrl: './retention-filters.html',
   styleUrl: './retention-filters.scss'
 })
-export class RetentionFiltersComponent {
+export class RetentionFiltersComponent implements OnInit {
   @Output() filterChanged = new EventEmitter<RetentionRequest>();
 
   filterForm!: FormGroup;
