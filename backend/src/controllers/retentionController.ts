@@ -27,7 +27,21 @@ export class RetentionController {
                 });
             }
 
-            const monthsNum = monthsToTrack ? parseInt(monthsToTrack as string) : 3;
+            if (monthsToTrack && typeof monthsToTrack !== 'string') {
+                return res.status(400).json({
+                    error: 'Months to track is required in number format',
+                    success: false,
+                });
+            }
+
+            if (monthsToTrack && parseInt(monthsToTrack) > 12) {
+                return res.status(400).json({
+                    error: 'Months to track must be at most 12',
+                    success: false,
+                });
+            }
+
+            const monthsNum = monthsToTrack ? parseInt(monthsToTrack) : 3;
 
             const report = await this.retentionService.calculateRetentionReport(
                 referenceMonth,
