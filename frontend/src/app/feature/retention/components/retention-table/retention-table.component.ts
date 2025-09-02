@@ -1,5 +1,5 @@
 import { Component, Input, SimpleChanges, ViewChild, OnChanges } from '@angular/core';
-import { RetentionData, RetentionMonth, RetentionResponse } from '../../models/retention';
+import { RetentionResponse } from '../../models/retention';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 
