@@ -1,0 +1,27 @@
+<div class="retention-dashboard">
+  <h1>Employee Retention Report</h1>
+
+  <!-- Filters -->
+  <div class="filters-section">
+    <app-retention-filters (filterChanged)="onFilterChanged($event)"></app-retention-filters>
+  </div>
+
+  <!-- Loading State -->
+  <div *ngIf="loading" class="loading">
+    <p>Loading retention data...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error">
+    <p>{{ error }}</p>
+    <button (click)="loadRetentionData()">Retry</button>
+  </div>
+
+  <!-- Retention Table -->
+  <div *ngIf="retentionData && !loading" class="table-container">
+    <h2>Report for {{ retentionData.referenceMonth }}</h2>
+    <p>Total Clients in Reference Month: {{ retentionData.totalClientsInReference }}</p>
+
+    <app-retention-table [retentionData]="retentionData"></app-retention-table>
+  </div>
+</div>
