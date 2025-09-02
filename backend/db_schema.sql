@@ -1,0 +1,18 @@
+CREATE TABLE CLIENTS ( 
+client_id INTEGER PRIMARY KEY,
+first_name TEXT NOT NULL,
+last_name TEXT NOT NULL,
+gender TEXT NOT NULL);
+
+CREATE TABLE EMPLOYEES (
+employee_id INTEGER PRIMARY KEY,
+first_name TEXT NOT NULL,
+last_name TEXT NOT NULL);
+
+CREATE TABLE APPOINTMENTS ( 
+appointment_id INTEGER PRIMARY KEY, 
+employee_id INTEGER, 
+client_id INTEGER, 
+date TEXT NOT NULL, 
+FOREIGN KEY(client_id) REFERENCES CLIENTS(client_id), 
+FOREIGN KEY(employee_id) REFERENCES EMPLOYEES(employee_id));
