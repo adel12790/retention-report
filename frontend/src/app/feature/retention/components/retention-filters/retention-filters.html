@@ -1,0 +1,35 @@
+<mat-card class="filters-card">
+  <mat-card-header>
+    <mat-card-title>Filters</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="filters-form">
+      <div class="form-row">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Reference Month</mat-label>
+          <input matInput type="month" formControlName="referenceMonth" [max]="maxDate | date:'yyyy-MM'"/>
+          <mat-error *ngIf="filterForm.get('referenceMonth')?.errors?.['required']">Reference Month is required</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Months to Track</mat-label>
+          <mat-select formControlName="monthsToTrack">
+            <mat-option value="1">1 Month</mat-option>
+            <mat-option value="2">2 Months</mat-option>
+            <mat-option value="3">3 Months</mat-option>
+            <mat-option value="6">6 Months</mat-option>
+            <mat-option value="12">12 Months</mat-option>
+          </mat-select>
+          <mat-error *ngIf="filterForm.get('monthsToTrack')?.errors?.['required']">Months to Track is required</mat-error>
+          <mat-error *ngIf="filterForm.get('monthsToTrack')?.errors?.['min']">Months to Track must be at least 1</mat-error>
+          <mat-error *ngIf="filterForm.get('monthsToTrack')?.errors?.['max']">Months to Track must be at most 12</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="form-actions">
+        <button mat-raised-button color="primary" type="submit" [disabled]="filterForm.invalid">Apply Filters</button>
+        <button mat-button type="button" (click)="onReset()">Reset</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
