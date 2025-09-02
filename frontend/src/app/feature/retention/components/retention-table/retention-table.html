@@ -1,0 +1,34 @@
+<div class="table-wrapper">
+  <table mat-table [dataSource]="dataSource" matSort class="retention-table">
+
+    <!-- Employee Name Column -->
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee</th>
+      <td mat-cell *matCellDef="let row">{{ row.employeeName }}</td>
+    </ng-container>
+
+    <!-- Reference Month Clients Column -->
+    <ng-container matColumnDef="referenceMonthClients">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Reference Clients</th>
+      <td mat-cell *matCellDef="let row">{{ row.referenceMonthClients }}</td>
+    </ng-container>
+
+    <!-- Dynamic Retention Columns -->
+    <ng-container *ngFor="let column of retentionColumns" [matColumnDef]="column">
+      <th mat-header-cell *matHeaderCellDef>{{ getColumnHeader(column) }}</th>
+      <td mat-cell *matCellDef="let row" class="retention-cell">
+        <div class="retention-data">
+          <span class="clients">{{ row[column]?.retainedClients || 0 }}</span>
+          <span class="percentage"
+                [class.positive]="(row[column]?.percentage || 0) > 50"
+                [class.negative]="(row[column]?.percentage || 0) <= 50">
+            ({{ (row[column]?.percentage || 0).toFixed(1) }}%)
+          </span>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
